@@ -14,6 +14,8 @@
 <script lang="ts" setup>
 import { Link } from '@element-plus/icons-vue'
 const openUrl = (url) => {
+  // open external browser, only worked in electron
+  // send url to API in  preload.js
   window.electronAPI.openUrl(url)
 }
 </script>
