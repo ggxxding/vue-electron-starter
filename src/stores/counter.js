@@ -10,3 +10,18 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+export const userData = defineStore('userData', () => {
+  const url = ref('http://localhost:3000')
+  const apiConfiguration = ref({
+    address: '192.168.71.31',
+    port: '60604',
+    username: 'ubuntu',
+    password: 'ubuntu',
+    form: {
+      example: '111',
+      example2: 222,
+    },
+  })
+  return { url, apiConfiguration }
+})

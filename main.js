@@ -1,9 +1,13 @@
-const { app, BrowserWindow } = require('electron/main')
+const { app, BrowserWindow, ipcMain, shell } = require('electron/main')
+const path = require('node:path')
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
   })
 
   win.loadFile('./dist/index.html')
@@ -12,6 +16,9 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow()
+  ipcMain.on('open-url', (event, url) => {
+    shell.openExternal(url)
+  })
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
